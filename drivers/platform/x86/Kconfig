@@ -534,7 +534,6 @@ config SENSORS_HDAPS
 config THINKPAD_WMI
 	tristate "THINKPAD WMI Driver (EXPERIMENTAL)"
 	depends on ACPI_WMI
-	depends on EXPERIMENTAL
 	---help---
 	  This driver allow you to modify BIOS passwords, settings, and boot order
 	  using Windows Management Instrumentation (WMI) through the Lenovo
