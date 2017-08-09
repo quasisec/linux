@@ -531,6 +531,17 @@ config SENSORS_HDAPS
 	  Say Y here if you have an applicable laptop and want to experience
 	  the awesome power of hdaps.
 
+config THINKPAD_WMI
+	tristate "THINKPAD WMI Driver (EXPERIMENTAL)"
+	depends on ACPI_WMI
+	depends on EXPERIMENTAL
+	---help---
+	  This driver allow you to modify BIOS passwords, settings, and boot order
+	  using Windows Management Instrumentation (WMI) through the Lenovo
+	  client-management interface.
+
+	  Say Y here if you have a WMI aware Thinkpad.
+
 config INTEL_MENLOW
 	tristate "Thermal Management driver for Intel menlow platform"
 	depends on ACPI_THERMAL
