@@ -16,6 +16,8 @@
 #ifndef _DELL_SMBIOS_H_
 #define _DELL_SMBIOS_H_
 
+#include <linux/device.h>
+
 struct notifier_block;
 
 /* This structure will be modified by the firmware when we enter
@@ -37,12 +39,19 @@ struct calling_interface_token {
 	};
 };
 
-int dell_smbios_error(int value);
+struct calling_interface_structure {
+	struct dmi_header header;
+	u16 cmdIOAddress;
+	u8 cmdIOCode;
+	u32 supportedCmds;
+	struct calling_interface_token tokens[];
+} __packed;
 
-struct calling_interface_buffer *dell_smbios_get_buffer(void);
-void dell_smbios_clear_buffer(void);
-void dell_smbios_release_buffer(void);
-void dell_smbios_send_request(int class, int select);
+int dell_smbios_register_device(struct device *d, void *call_fn);
+void dell_smbios_unregister_device(struct device *d);
+
+int dell_smbios_error(int value);
+int dell_smbios_call(struct calling_interface_buffer *buffer);
 
 struct calling_interface_token *dell_smbios_find_token(int tokenid);
 
